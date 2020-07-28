@@ -14,7 +14,7 @@ const CardDiv = styled.div`
 const CardWrapper = styled.div`
     margin-top:50px;
     display:grid;
-    grid-template-columns:250px 250px 250px ;
+    grid-template-columns:250px 250px 250px 250px ;
     column-gap:20px;
     grid-gap:10px;
     justify-content:center;

@@ -16,6 +16,8 @@ const Main = styled.main`
 const Body = () =>{
     const [type, setType] = useState<string>('');
     const [superType,setSuperType] = useState<string>('');
+    const [subType,setSubType] = useState<string>('');
+    const [hp, setHp] = useState<string>('');
     const [pokemons, setPokemons] = useState<Array<any>>([]);
     const [page, setPage] = useState(1);
     const [min, setMin] = useState(0);
@@ -26,7 +28,7 @@ const Body = () =>{
         if(superType === '' && e.currentTarget.checked === true){
             setSuperType(e.currentTarget.value+'|');
         }else if(e.currentTarget.checked === false){
-            let replaced = superType.replace(e.currentTarget.value, '')
+            let replaced = superType.replace(e.currentTarget.value+'|', '')
             setSuperType(replaced)
         }else if(superType !== '' && e.currentTarget.checked === true ){
             setSuperType(superType + e.currentTarget.value + '|')
@@ -41,6 +43,26 @@ const Body = () =>{
         }else if(type !== '' && e.currentTarget.checked === true ){
             setType(type + e.currentTarget.value + '|')
         }
+    }
+    const setCurrentSubType = (e:{currentTarget:{value:string, checked:boolean}}) =>{
+        if(subType === '' && e.currentTarget.checked === true){
+            setSubType(e.currentTarget.value+'|');
+        }else if(e.currentTarget.checked === false){
+            let replaced = subType.replace(e.currentTarget.value+'|', '')
+            setSubType(replaced)
+        }else if(subType !== '' && e.currentTarget.checked === true ){
+            setSubType(subType + e.currentTarget.value + '|')
+        }
+    }
+    const setCurrentHp = (e:{currentTarget:{value:string, checked:boolean}}) =>{
+        if(e.currentTarget.checked === true && e.currentTarget.value !== 'all'){
+            setHp(e.currentTarget.value);
+        } 
+        if(e.currentTarget.value === "all"){
+            setHp('')
+        }
+        
+    
     }
 
     const prevPage = () => {
@@ -65,17 +87,22 @@ const Body = () =>{
         setMax(page*12);
     },[page])
     useEffect(()=>{
-        pokemon.card.where({pageSize:500, type:type, supertype:superType})
+        pokemon.card.where({pageSize:500,  supertype:superType, types:type, subtype:subType, hp:hp})
         .then((cards: React.SetStateAction<any[]>)=>{
             setPokemons(cards)
         });
          
         console.log(type)
-    },[superType, type])
+    },[superType, type, subType, hp])
         
     return(
         <Main>
-            <Navbar setCurrentSuperType={setCurrentSuperType} setCurrentType={setCurrentType}/>
+            <Navbar 
+                setCurrentSuperType={setCurrentSuperType} 
+                setCurrentType={setCurrentType} 
+                setCurrentSubType={setCurrentSubType}
+                setCurrentHp={setCurrentHp}    
+            />
             <FilteredCards pokemons={pokemons} page={page} min={min} max={max}></FilteredCards>
             <Pages 
                 choosePage={choosePage} 
