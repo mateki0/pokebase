@@ -1,8 +1,8 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import styled from 'styled-components'
 
 const SearchDiv = styled.div`
-    margin:0 0 20px 0;
+    margin:0 0 40px 0;
     display:flex;
     flex-direction:column;
 `
@@ -30,9 +30,13 @@ const HomePage = styled.a`
 font-family:'MuseoW01-900';
     font-size:36px;
     color:#fff;
-    
+    transition:color .5s linear;
+    &:hover{
+        color:#e6001f;
+    }
 `
-const SearchBar = () =>{
+const SearchBar = ({...props}) =>{
+
     return(
         <SearchDiv>
             <WelcomeDiv>
@@ -40,7 +44,7 @@ const SearchBar = () =>{
                 <HomePage href="/">PokeBase</HomePage>
             </HomeDiv>
             </WelcomeDiv>
-            <SearchInput placeholder="Find pokemon"/>
+            <SearchInput placeholder="Find pokemon" onKeyPress={(e) => props.changeQuery(e)}/>
         </SearchDiv>
     )
 }

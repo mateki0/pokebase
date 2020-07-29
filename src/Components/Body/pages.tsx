@@ -18,6 +18,7 @@ const Page = styled.li`
     color:#fff;
     font-size:24px;
     &:hover{
+        text-decoration:underline;
         cursor:pointer;
     }
 `
@@ -37,11 +38,19 @@ const PagePop = styled.input<ShowProps>`
 const Next = styled(MdChevronRight)`
     padding:0;
     font-size:36px;
+    transition: color .5s;
+    &:hover{
+        color:#e6001f;
+    }
 
 `
 const Prev = styled(MdChevronLeft)`
     padding:0;
     font-size:36px;
+    transition: color .5s;
+    &:hover{
+        color:#e6001f;
+    }
 `
 
 const Pages = ({...props}) => {
@@ -64,15 +73,15 @@ const Pages = ({...props}) => {
                 pages.push(<Page key='prev' onClick={()=>props.prevPage()} ><Prev/></Page>)
             }
             if(props.page >= 3) {
-                pages.push(<Page key='1' onClick={(e)=>props.choosePage(e)} style={props.page===1 ? {color:'yellow'} : {color:'#fff'}}>1</Page>);
+                pages.push(<Page key='1' onClick={(e)=>props.choosePage(e)} style={props.page===1 ? {color:'#e6001f', textDecoration:'underline'} : {color:'#fff'}}>1</Page>);
                 pages.push(<Page key='multi' onClick={(e)=>handleMulti(e)}>...</Page>)
                 for(let i=props.page; i<=props.page+additionalPages; i++){
-                    pages.push(<Page key={i} onClick={(e)=>props.choosePage(e)} style={props.page===i ? {color:'yellow'} : {color:'#fff'}}>{i}</Page>)
+                    pages.push(<Page key={i} onClick={(e)=>props.choosePage(e)} style={props.page===i ? {color:'#e6001f', textDecoration:'underline'} : {color:'#fff'}}>{i}</Page>)
                     setPageList(pages)
                 }
         } else{
             for(let i=1; i<=props.page+additionalPages; i++){
-                pages.push(<Page key={i} onClick={(e)=>props.choosePage(e)} style={props.page===i ? {color:'yellow'} : {color:'#fff'}}>{i}</Page>)
+                pages.push(<Page key={i} onClick={(e)=>props.choosePage(e)} style={props.page===i ? {color:'#e6001f', textDecoration:'underline'} : {color:'#fff'}}>{i}</Page>)
                 setPageList(pages)
             }
         }

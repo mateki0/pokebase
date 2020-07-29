@@ -1,5 +1,6 @@
 import React from "react";
 import styled from 'styled-components'
+import LoadingIcon from "../loading-icon";
 
 const Card = styled.img`
     width:100%;
@@ -21,6 +22,7 @@ const CardWrapper = styled.div`
 `
 const FilteredCards = ({...props}) => {
     const eachPage = props.pokemons.slice(props.min,props.max)
+    if(!props.isLoading){
     return (
         <CardWrapper>
             {eachPage.map((a: {
@@ -33,6 +35,10 @@ imageUrl: string;
                 </CardDiv>)} 
         </CardWrapper>
     );
+} 
+return(
+    <LoadingIcon/>
+)
 }
 
 export default FilteredCards;

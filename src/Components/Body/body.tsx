@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import FilteredCards from './filtered-cards';
 import Pages from './pages'
 import Navbar from '../Navbar/navbar';
+import SearchBar from '../SearchBar/search-bar';
 
 const pokemon = require('pokemontcgsdk');
 
@@ -13,7 +14,31 @@ const Main = styled.main`
     width:80%;
     margin: 0 auto;
 `
+interface ICard {
+    
+    artist:string,
+    id:string,
+    name:string,
+    nationalPokedexNumber:number,
+    imageUrl:string,
+    imageUrlHiRes:string,
+    convertedRetreatCost:number,
+    evolvesFrom:string,
+    hp:string,
+    number:number,
+    rarity:string,
+    retreatCost:Array<string>,
+    series:string,
+    set:string,
+    setCode:string,
+    subtype:string,
+    supertype:string,
+    types:Array<string>
+
+}
 const Body = () =>{
+    const [isLoading, setIsLoading] = useState(true)
+    const [query, setQuery] = useState<string>('');
     const [type, setType] = useState<string>('');
     const [superType,setSuperType] = useState<string>('');
     const [subType,setSubType] = useState<string>('');
@@ -85,31 +110,78 @@ const Body = () =>{
     useEffect(()=>{
         setMin((page*12)-12)
         setMax(page*12);
-    },[page])
+    },[page]);
+
     useEffect(()=>{
-        pokemon.card.where({pageSize:500,  supertype:superType, types:type, subtype:subType, hp:hp})
-        .then((cards: React.SetStateAction<any[]>)=>{
-            setPokemons(cards)
-        });
-         
-        console.log(type)
-    },[superType, type, subType, hp])
+        if(query !== '') return
+        const fetchData = async()=>{
+            try{
+                await(
+                    pokemon.card.where({pageSize:500,  supertype:superType, types:type, subtype:subType, hp:hp})
+                    .then((cards: React.SetStateAction<any[]>)=>{
+                        setPokemons(cards);
+                        setIsLoading(false);
+                    }
+                    ));
+                
+            }catch (error){
+                console.log(error)
+            }
+        }
         
+         fetchData()
+        console.log(type)
+    },[superType, type, subType, hp]);
+
+    const changeQuery = (e: { currentTarget: { value: React.SetStateAction<string>; };key:string }) => {
+        if(e.key === "Enter" && e.currentTarget.value.length>=3){
+            setQuery(e.currentTarget.value)
+        }
+    }
+    useEffect(()=>{
+        if(query==='') return
+        const fetchData = async()=>{
+            try{
+                await(
+                    pokemon.card.where({pageSize:999, supertype:'pokemon', types:type, subtype:subType, hp:hp })
+                    .then((cards: ICard[])=>{
+                        let filtered: ICard[] = [];
+                        cards.map(a=> {
+
+                            if(a.name.toLowerCase().includes(query)){
+                                console.log(a)
+                                return filtered.push(a)
+                            };
+                        })
+                        setPokemons(filtered);
+                        setIsLoading(false);
+                    })
+                )
+            }catch (error){
+                console.log(error)
+            }
+        }
+         fetchData()
+        
+    }, [query,type,subType,hp])
+        
+    // if pokemons filter => if pokemons.name contains query, set those as Pokemons variable;
+    // write it in other useEffect and run every time query changes
     return(
         <Main>
+            <SearchBar changeQuery={changeQuery}/>
             <Navbar 
                 setCurrentSuperType={setCurrentSuperType} 
                 setCurrentType={setCurrentType} 
                 setCurrentSubType={setCurrentSubType}
                 setCurrentHp={setCurrentHp}    
             />
-            <FilteredCards pokemons={pokemons} page={page} min={min} max={max}></FilteredCards>
+            <FilteredCards pokemons={pokemons} page={page} min={min} max={max} isLoading={isLoading}></FilteredCards>
             <Pages 
                 choosePage={choosePage} 
                 changePage={changePage} 
                 prevPage={prevPage} 
                 nextPage={nextPage} 
-                
                 length={pokemons.length} 
                 page={page}/>
         </Main>
