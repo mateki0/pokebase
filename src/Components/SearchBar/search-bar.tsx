@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components'
-
+import {MdSearch} from 'react-icons/md'
 const SearchDiv = styled.div`
     margin:0 0 40px 0;
     display:flex;
@@ -35,8 +35,23 @@ font-family:'MuseoW01-900';
         color:#e6001f;
     }
 `
-const SearchBar = ({...props}) =>{
+const Search = styled.div`
+    margin:0 auto ;
+    position:relative;
+`
 
+const SearchButton = styled(MdSearch)`
+    position:absolute;
+    font-size:42px;
+    top:2px;
+    right:10px;
+
+    &:hover{
+        cursor:pointer;
+    }
+`
+const SearchBar = ({...props}) =>{
+    
     return(
         <SearchDiv>
             <WelcomeDiv>
@@ -44,7 +59,10 @@ const SearchBar = ({...props}) =>{
                 <HomePage href="/">PokeBase</HomePage>
             </HomeDiv>
             </WelcomeDiv>
-            <SearchInput placeholder="Find pokemon" onKeyPress={(e) => props.changeQuery(e)}/>
+            <Search>
+                <SearchInput placeholder="Find pokemon" ref={props.inputRef} onKeyPress={(e) => props.changeQuery(e)}/>
+                <SearchButton id="button" onClick={(e) => props.changeQuery(e)}></SearchButton>
+            </Search>
         </SearchDiv>
     )
 }

@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from 'react';
+import React,{useState, useEffect, useRef} from 'react';
 import styled from 'styled-components';
 import FilteredCards from './filtered-cards';
 import Pages from './pages'
@@ -37,6 +37,7 @@ interface ICard {
 
 }
 const Body = () =>{
+    const inputRef = useRef<HTMLInputElement>(null!);
     const [isLoading, setIsLoading] = useState(true)
     const [query, setQuery] = useState<string>('');
     const [type, setType] = useState<string>('');
@@ -131,18 +132,28 @@ const Body = () =>{
         
          fetchData()
         console.log(type)
-    },[superType, type, subType, hp]);
+    },[superType, type, subType, hp, query]);
 
-    const changeQuery = (e: { currentTarget: { value: React.SetStateAction<string>; };key:string }) => {
+    const changeQuery = (e: { currentTarget: { value: React.SetStateAction<string>; id:string };key:string }) => {
+        console.log(e.currentTarget.id)
         if(e.key === "Enter" && e.currentTarget.value.length>=3){
             setQuery(e.currentTarget.value);
         } 
         if(e.key === "Enter" && e.currentTarget.value.length<3){
             alert('The phrase should be at least 3 letters long');
         }
+
+        if(e.currentTarget.id === 'button' && inputRef && inputRef.current.value.length >= 3){
+            setQuery(inputRef.current.value);
+        }
+        if(e.currentTarget.id === 'button' && inputRef && inputRef.current.value.length < 3){
+            alert('The phrase should be at least 3 letters long');
+        }
+        
     }
     useEffect(()=>{
         if(query==='') return
+        
         const fetchData = async()=>{
             try{
                 await(
@@ -150,7 +161,6 @@ const Body = () =>{
                     .then((cards: ICard[])=>{
                         let filtered: ICard[] = [];
                         cards.map(a=> {
-
                             if(a.name.toLowerCase().includes(query)){
                                 console.log(a)
                                 return filtered.push(a)
@@ -172,7 +182,7 @@ const Body = () =>{
     // write it in other useEffect and run every time query changes
     return(
         <Main>
-            <SearchBar changeQuery={changeQuery}/>
+            <SearchBar changeQuery={changeQuery} inputRef={inputRef}/>
             <Navbar 
                 setCurrentSuperType={setCurrentSuperType} 
                 setCurrentType={setCurrentType} 
