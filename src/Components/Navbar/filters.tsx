@@ -1,7 +1,7 @@
 import React,{useState,useEffect, useRef} from 'react';
 import styled from 'styled-components';
 import {SuperTypeFilter, TypeFilter,SubTypeFilter, HpFilter} from './single-filter';
-
+import device from '../MediaQuerySizes'
 interface IOpenProps{
     isSuperOpen:boolean;
 }
@@ -72,8 +72,6 @@ const HpDiv = styled(MixinDiv)<IHpProps>`
 `
 
 const OpenDropdown = styled.button`
-    padding: 0.6em 2em;
-    margin-left:20px;
     border-radius:4px;
     border:none;
     outline:none;
@@ -88,6 +86,29 @@ const OpenDropdown = styled.button`
         cursor:pointer;
         color:#e6001f;
     }
+
+    @media ${device.mobileS}{
+        margin-left:5px;
+        font-size:12px;
+        padding:0.3em 1em;
+    }
+
+    @media ${device.mobileL}{
+        margin-left:10px;
+        font-size:14px;
+        padding:0.4em 1.2em;
+    }
+
+    @media ${device.tablet}{
+        margin-left:15px;
+        font-size:16px;
+        padding:0.5em 1.4em;
+    }
+    @media ${device.laptopL}{
+        margin-left:20px;
+        font-size:18px;
+        padding:0.6em 2em;
+    }
 `
 const FirstOpen = styled(OpenDropdown)`
     margin-left:0;
@@ -97,6 +118,10 @@ const Dropdown = styled.div`
     position:relative;
     display:flex;
     flex-direction:column;
+
+    @media ${device.mobileS}{
+        margin:0 5px;
+    }
 `
 const Filters = ({...props}) =>{
     const [isSuperOpen, setIsSuperOpen] = useState(false);

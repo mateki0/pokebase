@@ -4,15 +4,19 @@ import FilteredCards from './filtered-cards';
 import Pages from './pages'
 import Navbar from '../Navbar/navbar';
 import SearchBar from '../SearchBar/search-bar';
-
+import device from '../MediaQuerySizes'
 const pokemon = require('pokemontcgsdk');
 
 
 const Main = styled.main`
     display:flex;
     flex-direction:column;
-    width:80%;
+    width:100%;
     margin: 0 auto;
+    
+    @media ${device.laptop}{
+        width:80%;
+    }
 `
 interface ICard {
     
@@ -135,7 +139,6 @@ const Body = () =>{
     },[superType, type, subType, hp, query]);
 
     const changeQuery = (e: { currentTarget: { value: React.SetStateAction<string>; id:string };key:string }) => {
-        console.log(e.currentTarget.id)
         if(e.key === "Enter" && e.currentTarget.value.length>=3){
             setQuery(e.currentTarget.value);
         } 
@@ -153,7 +156,6 @@ const Body = () =>{
     }
     useEffect(()=>{
         if(query==='') return
-        
         const fetchData = async()=>{
             try{
                 await(
@@ -162,7 +164,6 @@ const Body = () =>{
                         let filtered: ICard[] = [];
                         cards.map(a=> {
                             if(a.name.toLowerCase().includes(query)){
-                                console.log(a)
                                 return filtered.push(a)
                             };
                         })

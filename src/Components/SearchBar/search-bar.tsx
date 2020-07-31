@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components'
-import {MdSearch} from 'react-icons/md'
+import {MdSearch} from 'react-icons/md';
+import device from '../MediaQuerySizes'
 const SearchDiv = styled.div`
     margin:0 0 40px 0;
     display:flex;
@@ -13,6 +14,11 @@ const SearchInput = styled.input`
     border:none;
     outline:none;
     font-size:18px;
+
+    @media ${device.mobileS}{
+        padding:6px 40px;
+        font-size:14px;
+    }
 `
 const WelcomeDiv = styled.div`
     display:flex;
@@ -48,6 +54,13 @@ const SearchButton = styled(MdSearch)`
 
     &:hover{
         cursor:pointer;
+    }
+
+    @media ${device.mobileS}{
+        font-size:26px;
+    }
+    @media ${device.mobileL}{
+        font-size:28px;
     }
 `
 const SearchBar = ({...props}) =>{
