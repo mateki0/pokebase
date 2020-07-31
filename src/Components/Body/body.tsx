@@ -135,7 +135,10 @@ const Body = () =>{
 
     const changeQuery = (e: { currentTarget: { value: React.SetStateAction<string>; };key:string }) => {
         if(e.key === "Enter" && e.currentTarget.value.length>=3){
-            setQuery(e.currentTarget.value)
+            setQuery(e.currentTarget.value);
+        } 
+        if(e.key === "Enter" && e.currentTarget.value.length<3){
+            alert('The phrase should be at least 3 letters long');
         }
     }
     useEffect(()=>{
