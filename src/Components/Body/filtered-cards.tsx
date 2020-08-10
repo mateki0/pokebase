@@ -58,8 +58,9 @@ const FilteredCards = ({...props}) => {
             {eachPage.map((a: {
 id: string;
 imageUrl: string;
+imageUrlHiRes:string;
 }, b: number) => <CardDiv key={b}>
-                    <a href={`card/${a.id}`}>
+                    <a href={a.imageUrlHiRes}>
                         <Card src={a.imageUrl} />
                     </a>
                 </CardDiv>)} 
@@ -72,3 +73,6 @@ return(
 }
 
 export default FilteredCards;
+
+
+// dokonczyc media query

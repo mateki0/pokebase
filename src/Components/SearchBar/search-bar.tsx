@@ -9,15 +9,25 @@ const SearchDiv = styled.div`
 `
 const SearchInput = styled.input`
     margin:0 auto ;
-    padding:12px 80px;
     border-radius:30px;
     border:none;
     outline:none;
-    font-size:18px;
 
     @media ${device.mobileS}{
         padding:6px 40px;
         font-size:14px;
+    }
+
+    @media ${device.tablet}{
+        padding:8px 50px;
+    }
+    @media ${device.laptop}{
+        padding:10px 60px;
+        font-size:16px;
+    }
+    @media ${device.laptopL}{
+        padding:12px 80px;
+        font-size:18px;
     }
 `
 const WelcomeDiv = styled.div`
@@ -29,8 +39,8 @@ const WelcomeDiv = styled.div`
 `
 
 const HomeDiv = styled.div`
-text-align:center;
-padding:10px 0;
+    text-align:center;
+    padding:10px 0;
 `
 const HomePage = styled.a`
 font-family:'MuseoW01-900';
@@ -59,8 +69,14 @@ const SearchButton = styled(MdSearch)`
     @media ${device.mobileS}{
         font-size:26px;
     }
-    @media ${device.mobileL}{
+    @media ${device.tablet}{
         font-size:28px;
+    }
+    @media ${device.laptop}{
+        font-size:36px;
+    }
+    @media ${device.laptopL}{
+        font-size:42px;
     }
 `
 const SearchBar = ({...props}) =>{

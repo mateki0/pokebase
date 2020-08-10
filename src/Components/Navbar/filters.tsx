@@ -25,7 +25,7 @@ const MixinDiv = styled.div`
     flex-direction:column;
     background: rgb(233,148,148);
     background: linear-gradient(0deg, rgba(233,148,148,1) 0%, rgba(255,232,75,1) 100%);
-    top:40px;
+    top:6vh;
     transition: all .5s;
     will-change:opacity,visibility;
     border:none;
@@ -47,7 +47,7 @@ visibility:hidden;
     opacity:1;
     visibility:visible;
         `};
-    margin-left:20px;
+    
 `
 
 const SubTypesDiv = styled(MixinDiv)<ISubProps>`
@@ -57,7 +57,7 @@ visibility:hidden;
     opacity:1;
     visibility:visible;
         `};
-    margin-left:20px;
+   
 `
 const HpDiv = styled(MixinDiv)<IHpProps>`
     opacity:0;
@@ -67,7 +67,7 @@ const HpDiv = styled(MixinDiv)<IHpProps>`
         visibility:visible;
         
         `};
-    margin-left:20px;
+    
     
 `
 
@@ -88,24 +88,20 @@ const OpenDropdown = styled.button`
     }
 
     @media ${device.mobileS}{
-        margin-left:5px;
         font-size:12px;
         padding:0.3em 1em;
     }
 
     @media ${device.mobileL}{
-        margin-left:10px;
         font-size:14px;
         padding:0.4em 1.2em;
     }
 
     @media ${device.tablet}{
-        margin-left:15px;
         font-size:16px;
         padding:0.5em 1.4em;
     }
     @media ${device.laptopL}{
-        margin-left:20px;
         font-size:18px;
         padding:0.6em 2em;
     }
@@ -114,13 +110,29 @@ const FirstOpen = styled(OpenDropdown)`
     margin-left:0;
 `
 const Dropdown = styled.div`
-    margin:0 40px;
     position:relative;
     display:flex;
     flex-direction:column;
-
+    padding:0 20px;
     @media ${device.mobileS}{
-        margin:0 5px;
+        
+        padding:0 5px;
+    }
+    @media ${device.mobileL}{
+        
+        padding:0 8px;
+    }
+    @media ${device.tablet}{
+        
+        padding:0 10px;
+    }
+    @media ${device.laptop}{
+        
+        padding:0 15px;
+    }
+    @media ${device.laptopL}{
+        
+        padding:0 20px;
     }
 `
 const Filters = ({...props}) =>{
@@ -133,6 +145,39 @@ const Filters = ({...props}) =>{
     const subRef = useRef<HTMLDivElement>(null!);
     const hpRef = useRef<HTMLDivElement>(null!);
 
+    
+    const closeDropdowns = (e:{currentTarget:{innerText:string}}) => {
+        switch(e.currentTarget.innerText){
+            case 'SuperType':
+                setIsSuperOpen(true);
+                setIsTypeOpen(false);
+                setIsSubOpen(false);
+                setIsHpOpen(false);
+            break;
+            
+            case 'Type':
+                setIsSuperOpen(false);
+                setIsTypeOpen(true);
+                setIsSubOpen(false);
+                setIsHpOpen(false);
+            break;
+
+            case 'SubType':
+                setIsSuperOpen(false);
+                setIsTypeOpen(false);
+                setIsSubOpen(true);
+                setIsHpOpen(false);
+            break;
+            
+            case 'HP':
+                setIsSuperOpen(false);
+                setIsTypeOpen(false);
+                setIsSubOpen(false);
+                setIsHpOpen(true);
+            break;
+        }
+            
+    }
     const handleClickOutside = (e: any) =>{
         if(superRef && typeRef && subRef && hpRef){
             if(!superRef.current.contains(e.target) && !typeRef.current.contains(e.target) && !subRef.current.contains(e.target) && !hpRef.current.contains(e.target)){
@@ -152,7 +197,7 @@ const Filters = ({...props}) =>{
     return (
         <FiltersDiv>
             <Dropdown ref={superRef}>
-                <FirstOpen onClick={()=>setIsSuperOpen(isSuperOpen ? false : true)}>SuperType</FirstOpen>
+                <FirstOpen onClick={(e)=>closeDropdowns(e)}>SuperType</FirstOpen>
                     <SupertypesDiv isSuperOpen={isSuperOpen} >
                         <SuperTypeFilter value='Energy' setCurrentSuperType={props.setCurrentSuperType}/>
                         <SuperTypeFilter value='Pokemon' setCurrentSuperType={props.setCurrentSuperType}/>
@@ -160,7 +205,7 @@ const Filters = ({...props}) =>{
                     </SupertypesDiv>
             </Dropdown>
                 <Dropdown ref={typeRef}>
-                    <OpenDropdown onClick={()=>setIsTypeOpen(isTypeOpen ? false : true)}>Type</OpenDropdown>
+                    <OpenDropdown onClick={(e)=>closeDropdowns(e)}>Type</OpenDropdown>
                     <TypesDiv isTypeOpen={isTypeOpen}>
                         <TypeFilter value='Colorless' setCurrentType={props.setCurrentType}/>
                         <TypeFilter value='Darkness' setCurrentType={props.setCurrentType}/>
@@ -176,7 +221,7 @@ const Filters = ({...props}) =>{
                     </TypesDiv>
                 </Dropdown>
                 <Dropdown ref={subRef}>
-                    <OpenDropdown onClick={()=>setIsSubOpen(isSubOpen ? false : true)}>SubType</OpenDropdown>
+                    <OpenDropdown onClick={(e)=>closeDropdowns(e)}>SubType</OpenDropdown>
                     <SubTypesDiv isSubOpen={isSubOpen}>
                         <SubTypeFilter value='EX' setCurrentSubType={props.setCurrentSubType}/>
                         <SubTypeFilter value='Special' setCurrentSubType={props.setCurrentSubType}/>
@@ -198,7 +243,7 @@ const Filters = ({...props}) =>{
                     </SubTypesDiv>
                 </Dropdown>
                 <Dropdown ref={hpRef}>
-                    <OpenDropdown onClick={()=>setIsHpOpen(isHpOpen ? false : true)}>HP</OpenDropdown>
+                    <OpenDropdown onClick={(e)=>closeDropdowns(e)}>HP</OpenDropdown>
                     <HpDiv isHpOpen={isHpOpen}>
                        <HpFilter value='lt50' type="radio" setCurrentHp={props.setCurrentHp}/>
                        <HpFilter value='lt100' type="radio" setCurrentHp={props.setCurrentHp}/>

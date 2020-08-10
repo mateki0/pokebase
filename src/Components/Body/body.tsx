@@ -52,7 +52,6 @@ const Body = () =>{
     const [page, setPage] = useState(1);
     const [min, setMin] = useState(0);
     const [max, setMax] = useState(12);
-
     const setCurrentSuperType = (e:{currentTarget:{value:string, checked:boolean}}) => {
         
         if(superType === '' && e.currentTarget.checked === true){
@@ -139,6 +138,7 @@ const Body = () =>{
     },[superType, type, subType, hp, query]);
 
     const changeQuery = (e: { currentTarget: { value: React.SetStateAction<string>; id:string };key:string }) => {
+
         if(e.key === "Enter" && e.currentTarget.value.length>=3){
             setQuery(e.currentTarget.value);
         } 
