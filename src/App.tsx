@@ -1,7 +1,27 @@
 import React,{useState} from 'react';
+import styled,{ createGlobalStyle } from 'styled-components'
 import Body from './Components/Body/body';
 import Pokeball from './Components/pokeball';
 
+const GlobalStyle = createGlobalStyle`
+  body,html{
+    top:0;
+    margin:0;
+    height:100%;
+    background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-image: linear-gradient( 135deg, #6B73FF 10%, #000DFF 100%);
+  #root{
+    height:100%;
+  }
+  }
+`
+const PokeAppDiv = styled.div`
+  min-height:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+`
 function App() {
   const [isClicked, setIsClicked] = useState(false);
 
@@ -16,9 +36,12 @@ function App() {
   );
   } else{
     return(
-      <div>
+      <>
+      <GlobalStyle/>
+      <PokeAppDiv> 
         <Pokeball showCards={showCards}/>
-      </div>
+      </PokeAppDiv>
+      </>
     )
   }
 }
