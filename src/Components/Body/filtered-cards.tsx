@@ -3,12 +3,27 @@ import styled from 'styled-components'
 import LoadingIcon from "../loading-icon";
 import device from '../MediaQuerySizes'
 const Card = styled.img`
+@media ${device.laptop}{
+display:block;
     width:100%;
     height:auto;
     border-radius:10px;
+    transform:rotateX(30deg);
+    
+transform-style: preserve-3d;
+transition:all .8s;
+&:hover{
+    transform:rotateX(0);
+    transform:scale(1.5);
+}
+}
 `
 const CardDiv = styled.div`
-    
+perspective:400px;
+&:hover{
+    z-index:999;
+}
+transition:all .8s;
     height:auto;
     
     @media ${device.mobileS}{
@@ -41,12 +56,16 @@ const CardWrapper = styled.div`
     }
     @media ${device.tablet}{
         grid-template-columns:170px 170px 170px 170px;
+        column-gap:40px;
+    }
+    @media ${device.laptop}{
+        column-gap:50px;
     }
     @media ${device.laptopL}{
         margin-top:50px;
         grid-template-columns:250px 250px 250px 250px ;
-        column-gap:20px;
-        grid-gap:10px;
+        column-gap:100px;
+        
     }
 
 `
