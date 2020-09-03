@@ -1,45 +1,30 @@
-import React from 'react';
-import styled,{keyframes} from 'styled-components';
+import React,{useEffect, useRef} from 'react';
+import styled from 'styled-components';
+import { gsap } from 'gsap';
 import device from './MediaQuerySizes'
-const rotate = keyframes`
-0%{
-    transform:rotateY(0deg);
-    box-shadow: 0px 0px 35px 10px rgba(255,105,79,1);
-}
-25%{
-    
-    box-shadow: 0px 0px 35px 10px rgba(245,71,71,1);
-}
-50%{
-    box-shadow: 0px 0px 35px 10px rgba(245,44,44,1);
-}
 
-100%{
-    transform:rotateY(360deg);
-    box-shadow: 0px 0px 35px 10px rgba(255,13,13,1);
-}
-`
 const PokeDiv = styled.div`
-min-height:100%;
-display:flex;
-flex-direction:column;
-width:40vw;
+    min-height:100%;
+    display:flex;
+    flex-direction:column;
+    width:40vw;
 `
 const PokeImg = styled.img`
-border-radius:50%;
+    opacity:0;
+    border-radius:50%;
     width:100%;
-   
+
     transition:all 1s;
-    animation:${rotate} 5s linear infinite;
+    
     &:hover{
         cursor:pointer;
         
     }
 `
 const OpenSpan = styled.span`
-font-family:'MuseoW01-900';
-color:#fff;
-padding-bottom:20px;
+    font-family:'MuseoW01-900';
+    color:#fff;
+    padding-bottom:20px;
     
     text-align:center;
 
@@ -61,11 +46,23 @@ padding-bottom:20px;
 `
 
 const Pokeball = ({...props}) => {
-    
+    const Poke = useRef<HTMLImageElement>(null!);
+    useEffect(()=>{
+        gsap.registerEffect({
+            name: "fade",
+            effect: (targets: gsap.TweenTarget, config: { duration: number; }) => {
+                return gsap.to(targets, {duration: config.duration, opacity: 1});
+            },
+            defaults: {duration: 1},
+            extendTimeline: true, 
+        });
+        gsap.effects.fade(Poke.current)
+        
+    },[Poke])
     return(
         <PokeDiv>
             <OpenSpan>Click Pokeball</OpenSpan>
-            <PokeImg onClick={()=>props.showCards()} src='./pokeball.png'/>
+            <PokeImg ref={Poke} onClick={()=>props.showCards()} src='./pokeball.png'/>
         </PokeDiv>
     )
 }

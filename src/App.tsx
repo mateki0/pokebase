@@ -13,6 +13,10 @@ const GlobalStyle = createGlobalStyle`
   background-image: linear-gradient( 135deg, #6B73FF 10%, #000DFF 100%);
   #root{
     height:100%;
+    top:0;
+    margin:0;
+    left:0;
+    right:0;
   }
   }
 `

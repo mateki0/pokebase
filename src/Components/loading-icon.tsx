@@ -1,41 +1,25 @@
-import React from 'react';
-import styled,{keyframes} from 'styled-components';
+import React,{useEffect, useRef} from 'react';
+import styled from 'styled-components';
+import { gsap } from 'gsap';
 
-const skBounce = keyframes`
-    0%,100%{
-        transform:scale(0.0)
-    } 50% {
-        transform:scale(1.0)
-    }
-
-`
 const Spinner = styled.div`
-width:80px;
-height:80px;
+width:600px;
+height:auto;
 position:relative;
-margin:200px auto;
+margin:100px auto;
 `
-
-const DoubleBounce = styled.div`
+const PokeballLoading = styled.img`
     width:100%;
-    height:100%;
-    border-radius:50%;
-    background-color:#fff;
-    opacity:0.6;
-    position:absolute;
-    top:0;
-    left:0;
-
-    animation:${skBounce} 2.0s infinite ease-in-out;
-`
-const DoubleBounce2 = styled(DoubleBounce)`
-    animation-delay: -1.0s;
 `
 const LoadingIcon = () => {
+    const myImg = useRef<HTMLImageElement>(null!)
+    useEffect(()=>{
+        gsap.to(myImg.current, { duration: 1.5, ease: "ease.out", opacity:0 })
+    },[])
+    
     return(
         <Spinner>
-            <DoubleBounce/>
-            <DoubleBounce2/>
+            <PokeballLoading ref={myImg} src='./pokeball.png' />
         </Spinner>
     )
 }

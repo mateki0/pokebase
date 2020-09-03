@@ -1,5 +1,6 @@
 import React,{useState, useEffect, useRef} from 'react';
 import styled from 'styled-components';
+
 import FilteredCards from './filtered-cards';
 import Pages from './pages'
 import Navbar from '../Navbar/navbar';
@@ -132,8 +133,7 @@ const Body = () =>{
                 console.log(error)
             }
         }
-        
-         fetchData()
+        fetchData()
         console.log(type)
     },[superType, type, subType, hp, query]);
 
@@ -142,17 +142,22 @@ const Body = () =>{
         if(e.key === "Enter" && e.currentTarget.value.length>=3){
             setQuery(e.currentTarget.value);
         } 
-        if(e.key === "Enter" && e.currentTarget.value.length<3){
+        if(e.key === "Enter" && (e.currentTarget.value.length<3 && e.currentTarget.value.length !==0) ){
             alert('The phrase should be at least 3 letters long');
+        }
+        if(e.key === "Enter" && e.currentTarget.value.length===0){
+            setQuery('');
         }
 
         if(e.currentTarget.id === 'button' && inputRef && inputRef.current.value.length >= 3){
             setQuery(inputRef.current.value);
         }
-        if(e.currentTarget.id === 'button' && inputRef && inputRef.current.value.length < 3){
+        if(e.currentTarget.id === 'button' && inputRef && inputRef.current.value.length === 0){
+            setQuery('');
+        }
+        if(e.currentTarget.id === 'button' && inputRef && (inputRef.current.value.length < 3 && inputRef.current.value.length !== 0)){
             alert('The phrase should be at least 3 letters long');
         }
-        
     }
     useEffect(()=>{
         if(query==='') return
@@ -179,8 +184,6 @@ const Body = () =>{
         
     }, [query,type,subType,hp])
         
-    // if pokemons filter => if pokemons.name contains query, set those as Pokemons variable;
-    // write it in other useEffect and run every time query changes
     return(
         <Main>
             <SearchBar changeQuery={changeQuery} inputRef={inputRef}/>

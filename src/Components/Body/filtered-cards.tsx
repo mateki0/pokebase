@@ -1,29 +1,31 @@
-import React from "react";
+import React,{useEffect} from "react";
+import {gsap} from 'gsap';
 import styled from 'styled-components'
 import LoadingIcon from "../loading-icon";
 import device from '../MediaQuerySizes'
 const Card = styled.img`
 @media ${device.laptop}{
-display:block;
+    display:block;
     width:100%;
     height:auto;
     border-radius:10px;
     transform:rotateX(30deg);
     
-transform-style: preserve-3d;
-transition:all .8s;
-&:hover{
-    transform:rotateX(0);
-    transform:scale(1.5);
-}
+    transform-style: preserve-3d;
+    transition:all .8s;
+    &:hover{
+        transform:rotateX(0);
+        transform:scale(1.5);
+    }
 }
 `
-const CardDiv = styled.div`
-perspective:400px;
-&:hover{
-    z-index:999;
-}
-transition:all .8s;
+const CardDiv = styled.li`
+    perspective:400px;
+    opacity:0;
+    &:hover{
+        z-index:999;
+    }
+    transition:all .8s;
     height:auto;
     
     @media ${device.mobileS}{
@@ -39,10 +41,12 @@ transition:all .8s;
         width:250px;
     }
 `
-const CardWrapper = styled.div`
+const CardWrapper = styled.ul`
     display:grid;
     justify-content:center;
-    
+    list-style-type:none;
+    padding:0;
+    margin:0;
     @media ${device.mobileS}{
         margin:10px auto 0 auto;
         column-gap:10px;
@@ -67,18 +71,24 @@ const CardWrapper = styled.div`
         column-gap:100px;
         
     }
-
 `
 const FilteredCards = ({...props}) => {
-    const eachPage = props.pokemons.slice(props.min,props.max)
+    const eachPage = props.pokemons.slice(props.min,props.max);
+    const myElements:any[] = [];
+    useEffect(()=>{
+        let tl = gsap.timeline();
+    
+        tl.fromTo(myElements, {opacity:0}, {duration:1, opacity: 1,  stagger:0.2})
+        
+    },[myElements])
     if(!props.isLoading){
     return (
-        <CardWrapper>
+        <CardWrapper >
             {eachPage.map((a: {
 id: string;
 imageUrl: string;
 imageUrlHiRes:string;
-}, b: number) => <CardDiv key={b}>
+}, index: number) => <CardDiv key={index} ref={li=> myElements[index] = li}>
                     <a href={a.imageUrlHiRes}>
                         <Card src={a.imageUrl} />
                     </a>
@@ -92,6 +102,3 @@ return(
 }
 
 export default FilteredCards;
-
-
-// dokonczyc media query

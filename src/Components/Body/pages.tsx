@@ -12,11 +12,13 @@ const PagesComponent = styled.div`
 const PagesUl = styled.ul`
     list-style-type:none;
     display:flex;
+    align-items:center;
 `
 const Page = styled.li`
-    padding:0 5px;
+    padding:0 5px ;
     color:#fff;
     font-size:24px;
+    
     &:hover{
         text-decoration:underline;
         cursor:pointer;
@@ -37,7 +39,7 @@ const PagePop = styled.input<ShowProps>`
 `
 const Next = styled(MdChevronRight)`
     padding:0;
-    font-size:36px;
+    font-size:34px;
     transition: color .5s;
     &:hover{
         color:#e6001f;
@@ -46,7 +48,7 @@ const Next = styled(MdChevronRight)`
 `
 const Prev = styled(MdChevronLeft)`
     padding:0;
-    font-size:36px;
+    font-size:34px;
     transition: color .5s;
     &:hover{
         color:#e6001f;
