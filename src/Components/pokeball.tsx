@@ -23,7 +23,7 @@ const PokeImg = styled.img`
 `
 const OpenSpan = styled.span`
     font-family:'MuseoW01-900';
-    color:#fff;
+    color:#0424D9;
     padding-bottom:20px;
     
     text-align:center;

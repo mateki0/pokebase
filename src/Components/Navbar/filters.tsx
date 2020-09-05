@@ -23,14 +23,16 @@ const MixinDiv = styled.div`
     position:absolute;
     display:flex;
     flex-direction:column;
-    background: rgb(233,148,148);
-    background: linear-gradient(0deg, rgba(233,148,148,1) 0%, rgba(255,232,75,1) 100%);
-    top:6vh;
+    background: rgb(5,40,242);
+    background: linear-gradient(0deg, rgba(5,40,242,1) 0%, rgba(2,30,115,1) 100%);
+    top:7.3vh;
     transition: all .5s;
     will-change:opacity,visibility;
     border:none;
     box-shadow:0px 0px 5px 0px rgb(233,148,148);
     border-radius:4px;
+    z-index:1001;
+    color:#fff;
 `
 const SupertypesDiv = styled(MixinDiv)<IOpenProps>`
 opacity:0;
@@ -77,11 +79,11 @@ const OpenDropdown = styled.button`
     outline:none;
     font-size:16px;
     font-family:'MuseoW01-900';
-    background: rgb(233,148,148);
-    background: linear-gradient(0deg, rgba(233,148,148,1) 0%, rgba(255,232,75,1) 100%);
+    background: rgb(5,40,242);
+    background: linear-gradient(0deg, rgba(5,40,242,1) 0%, rgba(2,30,115,1) 100%);
     box-shadow:0px 0px 5px 0px rgb(233,148,148);
     transition: all .5s linear;
-
+    color:#fff;
     &:hover{
         cursor:pointer;
         color:#e6001f;

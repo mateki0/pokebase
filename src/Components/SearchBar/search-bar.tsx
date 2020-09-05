@@ -8,11 +8,18 @@ const SearchDiv = styled.div`
     flex-direction:column;
 `
 const SearchInput = styled.input`
+font-family:'MuseoW01-900';
+font-weight:600;
+    color:#fff;
     margin:0 auto ;
     border-radius:30px;
     border:none;
     outline:none;
+    background:linear-gradient(90deg, rgba(5,40,242,1) 0%, rgba(4,36,217,1) 50%, rgba(2,30,115,1) 100%);
 
+    &::placeholder{
+        color:#fff;
+    }
     @media ${device.mobileS}{
         padding:6px 40px;
         font-size:14px;
@@ -45,7 +52,7 @@ const HomeDiv = styled.div`
 const HomePage = styled.a`
 font-family:'MuseoW01-900';
     font-size:36px;
-    color:#fff;
+    color:#0424D9;
     transition:color .5s linear;
     &:hover{
         color:#e6001f;
@@ -61,7 +68,7 @@ const SearchButton = styled(MdSearch)`
     font-size:42px;
     top:2px;
     right:10px;
-
+    color:#F2CB05;
     &:hover{
         cursor:pointer;
     }

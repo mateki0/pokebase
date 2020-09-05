@@ -16,9 +16,9 @@ const PagesUl = styled.ul`
 `
 const Page = styled.li`
     padding:0 5px ;
-    color:#fff;
+    color:#0424D9;
     font-size:24px;
-    
+    font-weight:600;
     &:hover{
         text-decoration:underline;
         cursor:pointer;
@@ -38,6 +38,7 @@ const PagePop = styled.input<ShowProps>`
     
 `
 const Next = styled(MdChevronRight)`
+margin-top:4px;
     padding:0;
     font-size:34px;
     transition: color .5s;
@@ -47,6 +48,7 @@ const Next = styled(MdChevronRight)`
 
 `
 const Prev = styled(MdChevronLeft)`
+margin-top:4px;
     padding:0;
     font-size:34px;
     transition: color .5s;
@@ -75,15 +77,15 @@ const Pages = ({...props}) => {
                 pages.push(<Page key='prev' onClick={()=>props.prevPage()} ><Prev/></Page>)
             }
             if(props.page >= 3) {
-                pages.push(<Page key='1' onClick={(e)=>props.choosePage(e)} style={props.page===1 ? {color:'#e6001f', textDecoration:'underline'} : {color:'#fff'}}>1</Page>);
+                pages.push(<Page key='1' onClick={(e)=>props.choosePage(e)} style={props.page===1 ? {color:'#e6001f', textDecoration:'underline'} : {color:'#0424D9'}}>1</Page>);
                 pages.push(<Page key='multi' onClick={(e)=>handleMulti(e)}>...</Page>)
                 for(let i=props.page; i<=props.page+additionalPages; i++){
-                    pages.push(<Page key={i} onClick={(e)=>props.choosePage(e)} style={props.page===i ? {color:'#e6001f', textDecoration:'underline'} : {color:'#fff'}}>{i}</Page>)
+                    pages.push(<Page key={i} onClick={(e)=>props.choosePage(e)} style={props.page===i ? {color:'#e6001f', textDecoration:'underline'} : {color:'#0424D9'}}>{i}</Page>)
                     setPageList(pages)
                 }
         } else{
             for(let i=1; i<=props.page+additionalPages; i++){
-                pages.push(<Page key={i} onClick={(e)=>props.choosePage(e)} style={props.page===i ? {color:'#e6001f', textDecoration:'underline'} : {color:'#fff'}}>{i}</Page>)
+                pages.push(<Page key={i} onClick={(e)=>props.choosePage(e)} style={props.page===i ? {color:'#e6001f', textDecoration:'underline'} : {color:'#0424D9'}}>{i}</Page>)
                 setPageList(pages)
             }
         }

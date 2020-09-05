@@ -10,7 +10,7 @@ const GlobalStyle = createGlobalStyle`
     height:100%;
     background-repeat: no-repeat;
   background-attachment: fixed;
-  background-image: linear-gradient( 135deg, #6B73FF 10%, #000DFF 100%);
+  background-color:#F2CB05;
   #root{
     height:100%;
     top:0;
