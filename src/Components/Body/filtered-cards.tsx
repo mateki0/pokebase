@@ -78,7 +78,9 @@ const FilteredCards = ({...props}) => {
     const myElements:any[] = [];
     useEffect(()=>{
         let tl = gsap.timeline();
-    
+        gsap.config({
+            nullTargetWarn:false   
+        })
         tl.fromTo(myElements, {opacity:0}, {duration:1, opacity: 1,  stagger:0.2})
         
     },[myElements])
@@ -86,10 +88,10 @@ const FilteredCards = ({...props}) => {
     return (
         <CardWrapper >
             {eachPage.map((a: {
-id: string;
-imageUrl: string;
-imageUrlHiRes:string;
-}, index: number) => <CardDiv key={index} ref={li=> myElements[index] = li}>
+                id: string;
+                imageUrl: string;
+                imageUrlHiRes:string;
+                    }, index: number) => <CardDiv key={index} ref={li=> myElements[index] = li}>
                     <a href={a.imageUrlHiRes}>
                         <Card src={a.imageUrl} />
                     </a>

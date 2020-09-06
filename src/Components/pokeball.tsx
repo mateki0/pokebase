@@ -58,7 +58,7 @@ const Pokeball = ({...props}) => {
         });
         gsap.effects.fade(Poke.current)
         
-    },[Poke])
+    },[])
     return(
         <PokeDiv>
             <OpenSpan>Click Pokeball</OpenSpan>
