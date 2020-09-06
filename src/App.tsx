@@ -37,16 +37,17 @@ function App() {
   if(isClicked){
   return (
     <div>
+      <GlobalStyle/>
       <Body/>
     </div>
   );
   } else{
     return(
       <>
-      <GlobalStyle/>
-      <PokeAppDiv> 
-        <Pokeball showCards={showCards}/>
-      </PokeAppDiv>
+        <GlobalStyle/>
+        <PokeAppDiv> 
+          <Pokeball showCards={showCards}/>
+        </PokeAppDiv>
       </>
     )
   }
