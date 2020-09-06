@@ -22,7 +22,7 @@ const FilterLabel = styled.label`
     display:flex;
     justify-content:space-between;
     padding:0 5px;
-    font-family:'MuseoW01-900';
+    font-family: 'Courgette', cursive;
     align-items:center;
     @media ${device.mobileS}{
         font-size:10px;

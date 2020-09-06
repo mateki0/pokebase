@@ -29,7 +29,6 @@ const MixinDiv = styled.div`
     transition: all .5s;
     will-change:opacity,visibility;
     border:none;
-    box-shadow:0px 0px 5px 0px rgb(233,148,148);
     border-radius:4px;
     z-index:1001;
     color:#fff;
@@ -43,23 +42,21 @@ visibility:hidden;
         `}
 `
 const TypesDiv = styled(MixinDiv)<ITypeProps>`
-opacity:0;
-visibility:hidden;
+    opacity:0;
+    visibility:hidden;
     ${({isTypeOpen}) => isTypeOpen && `
     opacity:1;
     visibility:visible;
         `};
-    
 `
 
 const SubTypesDiv = styled(MixinDiv)<ISubProps>`
-opacity:0;
-visibility:hidden;
+    opacity:0;
+    visibility:hidden;
     ${({isSubOpen}) => isSubOpen && `
     opacity:1;
     visibility:visible;
         `};
-   
 `
 const HpDiv = styled(MixinDiv)<IHpProps>`
     opacity:0;
@@ -67,10 +64,7 @@ const HpDiv = styled(MixinDiv)<IHpProps>`
     ${({isHpOpen}) => isHpOpen && `
         opacity:1;
         visibility:visible;
-        
         `};
-    
-    
 `
 
 const OpenDropdown = styled.button`
@@ -78,7 +72,7 @@ const OpenDropdown = styled.button`
     border:none;
     outline:none;
     font-size:16px;
-    font-family:'MuseoW01-900';
+    font-family: 'Courgette', cursive;
     background: rgb(5,40,242);
     background: linear-gradient(0deg, rgba(5,40,242,1) 0%, rgba(2,30,115,1) 100%);
     box-shadow:0px 0px 5px 0px rgb(233,148,148);

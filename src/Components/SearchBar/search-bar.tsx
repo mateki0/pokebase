@@ -8,7 +8,7 @@ const SearchDiv = styled.div`
     flex-direction:column;
 `
 const SearchInput = styled.input`
-font-family:'MuseoW01-900';
+font-family: 'Courgette', cursive;
 font-weight:600;
     color:#fff;
     margin:0 auto ;
@@ -42,7 +42,7 @@ const WelcomeDiv = styled.div`
     flex-direction:column;
     margin:0 auto 20px auto;
     color:#fff;
-    font-family:'MuseoW01-900';
+    font-family: 'Courgette', cursive;
 `
 
 const HomeDiv = styled.div`
@@ -50,10 +50,11 @@ const HomeDiv = styled.div`
     padding:10px 0;
 `
 const HomePage = styled.a`
-font-family:'MuseoW01-900';
+    font-family: 'Courgette', cursive;
     font-size:36px;
     color:#0424D9;
     transition:color .5s linear;
+    font-weight:600;
     &:hover{
         color:#e6001f;
     }

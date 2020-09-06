@@ -22,10 +22,10 @@ const PokeImg = styled.img`
     }
 `
 const OpenSpan = styled.span`
-    font-family:'MuseoW01-900';
+    font-family: 'Courgette', cursive;
     color:#0424D9;
     padding-bottom:20px;
-    
+    font-weight:600;
     text-align:center;
 
     @media ${device.mobileS}{

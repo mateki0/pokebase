@@ -14,7 +14,6 @@ const Main = styled.main`
     flex-direction:column;
     width:100%;
     margin: 0 auto;
-    
     @media ${device.laptop}{
         width:80%;
     }

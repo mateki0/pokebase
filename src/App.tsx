@@ -10,8 +10,10 @@ const GlobalStyle = createGlobalStyle`
     height:100%;
     background-repeat: no-repeat;
   background-attachment: fixed;
-  background-color:#F2CB05;
+  background:#F2CB05;
+  font-family: 'Courgette', cursive;
   #root{
+    
     height:100%;
     top:0;
     margin:0;
