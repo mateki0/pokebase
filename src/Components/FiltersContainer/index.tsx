@@ -1,18 +1,19 @@
 import React from 'react';
 import Filters from '../Filters';
+import { IFilterSetters } from '../types';
 
-const FiltersContainer = (props: {
-  setCurrentSuperType: any;
-  setCurrentType: any;
-  setCurrentSubType: any;
-  setCurrentHp: any;
-}) => {
+const FiltersContainer = ({
+  setCurrentSuperType,
+  setCurrentType,
+  setCurrentSubType,
+  setCurrentHp,
+}: IFilterSetters) => {
   return (
     <Filters
-      setCurrentSuperType={props.setCurrentSuperType}
-      setCurrentType={props.setCurrentType}
-      setCurrentSubType={props.setCurrentSubType}
-      setCurrentHp={props.setCurrentHp}
+      setCurrentSuperType={setCurrentSuperType}
+      setCurrentType={setCurrentType}
+      setCurrentSubType={setCurrentSubType}
+      setCurrentHp={setCurrentHp}
     />
   );
 };

@@ -33,3 +33,17 @@ export interface IPokemon {
     };
   };
 }
+
+export interface IFilteredCards {
+  pokemons: IPokemon[];
+  min: number;
+  max: number;
+  isLoading: boolean;
+}
+
+export interface IFilterSetters {
+  setCurrentSuperType: (e: { currentTarget: { value: string; checked: boolean } }) => void;
+  setCurrentType: (e: { currentTarget: { value: string; checked: boolean } }) => void;
+  setCurrentSubType: (e: { currentTarget: { value: string; checked: boolean } }) => void;
+  setCurrentHp: (e: { currentTarget: { value: string; checked: boolean } }) => void;
+}

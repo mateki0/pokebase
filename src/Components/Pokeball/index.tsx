@@ -4,7 +4,7 @@ import PokeballWrapper from './styled/PokeballWrapper';
 import OpenSpan from './styled/OpenSpan';
 import PokeImage from './styled/PokeballImage';
 
-const Pokeball = ({ ...props }) => {
+const Pokeball = ({ showCards }: { showCards: () => void }) => {
   const Poke = useRef<HTMLImageElement>(null!);
   useEffect(() => {
     gsap.registerEffect({
@@ -20,7 +20,7 @@ const Pokeball = ({ ...props }) => {
   return (
     <PokeballWrapper>
       <OpenSpan>Click Pokeball</OpenSpan>
-      <PokeImage ref={Poke} onClick={() => props.showCards()} src="./pokeball.png" />
+      <PokeImage ref={Poke} onClick={() => showCards()} src="./pokeball.png" />
     </PokeballWrapper>
   );
 };

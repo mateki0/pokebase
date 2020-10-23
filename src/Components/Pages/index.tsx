@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import NextPage from './styled/NextPage';
 import PageListItem from './styled/PageListItem';
@@ -17,79 +17,74 @@ interface IPages {
 }
 const Pages = ({ choosePage, changePage, prevPage, nextPage, length, page }: IPages) => {
   const [showMultiple, setShowMultiple] = useState(false);
+  const [pageList, setPageList] = useState<Array<any>>();
   const allPages = Math.ceil(length / 12);
   const pages: Array<any> = [];
   const handleMulti = (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
     setShowMultiple(true);
   };
-  const renderPages = useCallback(
-    (additionalPages: number) => {
-      if (page > 1) {
-        pages.push(
-          <PageListItem key="prev" onClick={() => prevPage()}>
-            <PrevPage />
-          </PageListItem>
-        );
-      }
-      if (page >= 3) {
+  const renderPages = (additionalPages: number) => {
+    if (page > 1) {
+      pages.push(
+        <PageListItem key="prev" onClick={() => prevPage()}>
+          <PrevPage />
+        </PageListItem>
+      );
+    }
+    if (page >= 3) {
+      pages.push(
+        <PageListItem
+          key="1"
+          onClick={(e) => choosePage(e)}
+          style={
+            page === 1 ? { color: '#e6001f', textDecoration: 'underline' } : { color: '#0424D9' }
+          }
+        >
+          1
+        </PageListItem>
+      );
+      pages.push(
+        <PageListItem key="multi" onClick={(e) => handleMulti(e)}>
+          ...
+        </PageListItem>
+      );
+      for (let i = page; i <= page + additionalPages; i++) {
         pages.push(
           <PageListItem
-            key="1"
+            key={i}
             onClick={(e) => choosePage(e)}
             style={
-              page === 1 ? { color: '#e6001f', textDecoration: 'underline' } : { color: '#0424D9' }
+              page === i ? { color: '#e6001f', textDecoration: 'underline' } : { color: '#0424D9' }
             }
           >
-            1
-          </PageListItem>
-        );
-        pages.push(
-          <PageListItem key="multi" onClick={(e) => handleMulti(e)}>
-            ...
-          </PageListItem>
-        );
-        for (let i = page; i <= page + additionalPages; i++) {
-          pages.push(
-            <PageListItem
-              key={i}
-              onClick={(e) => choosePage(e)}
-              style={
-                page === i
-                  ? { color: '#e6001f', textDecoration: 'underline' }
-                  : { color: '#0424D9' }
-              }
-            >
-              {i}
-            </PageListItem>
-          );
-        }
-      } else {
-        for (let i = 1; i <= page + additionalPages; i++) {
-          pages.push(
-            <PageListItem
-              key={i}
-              onClick={(e) => choosePage(e)}
-              style={
-                page === i
-                  ? { color: '#e6001f', textDecoration: 'underline' }
-                  : { color: '#0424D9' }
-              }
-            >
-              {i}
-            </PageListItem>
-          );
-        }
-      }
-      if (page < allPages) {
-        pages.push(
-          <PageListItem key="next" onClick={() => nextPage()}>
-            <NextPage />
+            {i}
           </PageListItem>
         );
       }
-    },
-    [allPages, pages]
-  );
+    } else {
+      for (let i = 1; i <= page + additionalPages; i++) {
+        pages.push(
+          <PageListItem
+            key={i}
+            onClick={(e) => choosePage(e)}
+            style={
+              page === i ? { color: '#e6001f', textDecoration: 'underline' } : { color: '#0424D9' }
+            }
+          >
+            {i}
+          </PageListItem>
+        );
+      }
+    }
+    if (page < allPages) {
+      pages.push(
+        <PageListItem key="next" onClick={() => nextPage()}>
+          <NextPage />
+        </PageListItem>
+      );
+      setPageList(pages);
+    }
+  };
   useEffect(() => {
     setShowMultiple(false);
 
@@ -102,7 +97,7 @@ const Pages = ({ choosePage, changePage, prevPage, nextPage, length, page }: IPa
 
   return (
     <PagesWrapper>
-      <PagesUl>{pages}</PagesUl>
+      <PagesUl>{pageList}</PagesUl>
       <PageSelectInput
         type="number"
         min="1"

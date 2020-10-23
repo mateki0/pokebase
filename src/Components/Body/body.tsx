@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import styled from 'styled-components';
 import FilteredCards from '../Cards';
 import Pages from '../Pages';
@@ -40,6 +40,7 @@ const Body = () => {
       setSuperType(superType + e.currentTarget.value + '|');
     }
   };
+
   const setCurrentType = (e: { currentTarget: { value: string; checked: boolean } }) => {
     if (type === '' && e.currentTarget.checked === true) {
       setType(e.currentTarget.value + '|');
@@ -50,6 +51,7 @@ const Body = () => {
       setType(type + e.currentTarget.value + '|');
     }
   };
+
   const setCurrentSubType = (e: { currentTarget: { value: string; checked: boolean } }) => {
     if (subType === '' && e.currentTarget.checked === true) {
       setSubType(e.currentTarget.value + '|');
@@ -60,6 +62,7 @@ const Body = () => {
       setSubType(subType + e.currentTarget.value + '|');
     }
   };
+
   const setCurrentHp = (e: { currentTarget: { value: string; checked: boolean } }) => {
     if (e.currentTarget.checked === true && e.currentTarget.value !== 'all') {
       setHp(e.currentTarget.value);
@@ -81,33 +84,28 @@ const Body = () => {
       setPage(page);
     }
   };
+
   const choosePage = (e: { currentTarget: { innerText: string } }) => {
     let page = parseInt(e.currentTarget.innerText);
-
     setPage(page);
   };
+
   useEffect(() => {
     setMin(page * 12 - 12);
     setMax(page * 12);
   }, [page]);
-
-  useEffect(() => {
-    if (query !== '') return;
-    const fetchData = async () => {
-      try {
-        await pokemon.card
-          .where({ pageSize: 500, supertype: superType, types: type, subtype: subType, hp: hp })
-          .then((cards: React.SetStateAction<IPokemon[]>) => {
-            setPokemons(cards);
-            setIsLoading(false);
-          });
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-    console.log(type);
-  }, [superType, type, subType, hp, query]);
+  const fetchDataWithoutQuery = useCallback(async () => {
+    try {
+      await pokemon.card
+        .where({ pageSize: 999, supertype: superType, types: type, subtype: subType, hp: hp })
+        .then((cards: React.SetStateAction<IPokemon[]>) => {
+          setPokemons(cards);
+          setIsLoading(false);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }, [superType, type, subType, hp]);
 
   const changeQuery = (e: {
     currentTarget: { value: React.SetStateAction<string>; id: string };
@@ -142,29 +140,32 @@ const Body = () => {
       alert('The phrase should be at least 3 letters long');
     }
   };
-  useEffect(() => {
-    if (query === '') return;
-    const fetchData = async () => {
-      try {
-        await pokemon.card
-          .where({ pageSize: 999, supertype: 'pokemon', types: type, subtype: subType, hp: hp })
-          .then((cards: IPokemon[]) => {
-            let filtered: IPokemon[] = [];
-            cards.map((a) => {
-              if (a.name.toLowerCase().includes(query)) {
-                return filtered.push(a);
-              }
-            });
-            setPokemons(filtered);
-            setIsLoading(false);
+
+  const fetchDataWithQuery = useCallback(async () => {
+    try {
+      await pokemon.card
+        .where({ pageSize: 999, supertype: 'pokemon', types: type, subtype: subType, hp: hp })
+        .then((cards: IPokemon[]) => {
+          let filtered: IPokemon[] = [];
+          cards.map((a) => {
+            if (a.name.toLowerCase().includes(query)) {
+              return filtered.push(a);
+            }
           });
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
+          setPokemons(filtered);
+          setIsLoading(false);
+        });
+    } catch (error) {
+      console.log(error);
+    }
   }, [query, type, subType, hp]);
-  console.log(pokemons);
+  useEffect(() => {
+    if (query === '') {
+      fetchDataWithoutQuery();
+    } else {
+      fetchDataWithQuery();
+    }
+  }, []);
   return (
     <Main>
       <Header changeQuery={changeQuery} inputRef={inputRef} />
@@ -174,13 +175,7 @@ const Body = () => {
         setCurrentSubType={setCurrentSubType}
         setCurrentHp={setCurrentHp}
       />
-      <FilteredCards
-        pokemons={pokemons}
-        page={page}
-        min={min}
-        max={max}
-        isLoading={isLoading}
-      ></FilteredCards>
+      <FilteredCards pokemons={pokemons} min={min} max={max} isLoading={isLoading}></FilteredCards>
       <Pages
         choosePage={choosePage}
         changePage={changePage}

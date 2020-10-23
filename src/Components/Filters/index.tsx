@@ -4,8 +4,13 @@ import DropdownOptionsWrapper from '../Filters/styled/DropdownOptionsWrapper';
 import DropdownWrapper from '../Filters/styled/DropdownWrapper';
 import OpenDropdownButton from '../Filters/styled/OpenDropdownButton';
 import SingleFilter from '../SingleFilter';
-
-const Filters = ({ ...props }) => {
+import { IFilterSetters } from '../types';
+const Filters = ({
+  setCurrentSuperType,
+  setCurrentType,
+  setCurrentSubType,
+  setCurrentHp,
+}: IFilterSetters) => {
   const [isSuperOpen, setIsSuperOpen] = useState(false);
   const [isTypeOpen, setIsTypeOpen] = useState(false);
   const [isSubOpen, setIsSubOpen] = useState(false);
@@ -72,60 +77,60 @@ const Filters = ({ ...props }) => {
       <DropdownWrapper ref={superRef}>
         <OpenDropdownButton onClick={(e) => closeDropdowns(e)}>SuperType</OpenDropdownButton>
         <DropdownOptionsWrapper isOpen={isSuperOpen}>
-          <SingleFilter value="Energy" setCurrentType={props.setCurrentSuperType} />
-          <SingleFilter value="Pokemon" setCurrentType={props.setCurrentSuperType} />
-          <SingleFilter value="Trainer" setCurrentType={props.setCurrentSuperType} />
+          <SingleFilter value="Energy" setCurrentType={setCurrentSuperType} />
+          <SingleFilter value="Pokemon" setCurrentType={setCurrentSuperType} />
+          <SingleFilter value="Trainer" setCurrentType={setCurrentSuperType} />
         </DropdownOptionsWrapper>
       </DropdownWrapper>
       <DropdownWrapper ref={typeRef}>
         <OpenDropdownButton onClick={(e) => closeDropdowns(e)}>Type</OpenDropdownButton>
         <DropdownOptionsWrapper isOpen={isTypeOpen}>
-          <SingleFilter value="Colorless" setCurrentType={props.setCurrentType} />
-          <SingleFilter value="Darkness" setCurrentType={props.setCurrentType} />
-          <SingleFilter value="Dragon" setCurrentType={props.setCurrentType} />
-          <SingleFilter value="Fairy" setCurrentType={props.setCurrentType} />
-          <SingleFilter value="Fighting" setCurrentType={props.setCurrentType} />
-          <SingleFilter value="Fire" setCurrentType={props.setCurrentType} />
-          <SingleFilter value="Grass" setCurrentType={props.setCurrentType} />
-          <SingleFilter value="Lightning" setCurrentType={props.setCurrentType} />
-          <SingleFilter value="Metal" setCurrentType={props.setCurrentType} />
-          <SingleFilter value="Psychic" setCurrentType={props.setCurrentType} />
-          <SingleFilter value="Water" setCurrentType={props.setCurrentType} />
+          <SingleFilter value="Colorless" setCurrentType={setCurrentType} />
+          <SingleFilter value="Darkness" setCurrentType={setCurrentType} />
+          <SingleFilter value="Dragon" setCurrentType={setCurrentType} />
+          <SingleFilter value="Fairy" setCurrentType={setCurrentType} />
+          <SingleFilter value="Fighting" setCurrentType={setCurrentType} />
+          <SingleFilter value="Fire" setCurrentType={setCurrentType} />
+          <SingleFilter value="Grass" setCurrentType={setCurrentType} />
+          <SingleFilter value="Lightning" setCurrentType={setCurrentType} />
+          <SingleFilter value="Metal" setCurrentType={setCurrentType} />
+          <SingleFilter value="Psychic" setCurrentType={setCurrentType} />
+          <SingleFilter value="Water" setCurrentType={setCurrentType} />
         </DropdownOptionsWrapper>
       </DropdownWrapper>
       <DropdownWrapper ref={subRef}>
         <OpenDropdownButton onClick={(e) => closeDropdowns(e)}>SubType</OpenDropdownButton>
         <DropdownOptionsWrapper isOpen={isSubOpen}>
-          <SingleFilter value="EX" setCurrentType={props.setCurrentSubType} />
-          <SingleFilter value="Special" setCurrentType={props.setCurrentSubType} />
-          <SingleFilter value="Restored" setCurrentType={props.setCurrentSubType} />
-          <SingleFilter value="Level Up" setCurrentType={props.setCurrentSubType} />
-          <SingleFilter value="MEGA" setCurrentType={props.setCurrentSubType} />
-          <SingleFilter value="Technical Machine" setCurrentType={props.setCurrentSubType} />
-          <SingleFilter value="Item" setCurrentType={props.setCurrentSubType} />
-          <SingleFilter value="Stadium" setCurrentType={props.setCurrentSubType} />
-          <SingleFilter value="Supporter" setCurrentType={props.setCurrentSubType} />
-          <SingleFilter value="Stage 1" setCurrentType={props.setCurrentSubType} />
-          <SingleFilter value="GX" setCurrentType={props.setCurrentSubType} />
-          <SingleFilter value="Pokemon Tool" setCurrentType={props.setCurrentSubType} />
-          <SingleFilter value="Basic" setCurrentType={props.setCurrentSubType} />
-          <SingleFilter value="LEGEND" setCurrentType={props.setCurrentSubType} />
-          <SingleFilter value="Stage 2" setCurrentType={props.setCurrentSubType} />
-          <SingleFilter value="BREAK" setCurrentType={props.setCurrentSubType} />
-          <SingleFilter value="Rocket's Secret Machine" setCurrentType={props.setCurrentSubType} />
+          <SingleFilter value="EX" setCurrentType={setCurrentSubType} />
+          <SingleFilter value="Special" setCurrentType={setCurrentSubType} />
+          <SingleFilter value="Restored" setCurrentType={setCurrentSubType} />
+          <SingleFilter value="Level Up" setCurrentType={setCurrentSubType} />
+          <SingleFilter value="MEGA" setCurrentType={setCurrentSubType} />
+          <SingleFilter value="Technical Machine" setCurrentType={setCurrentSubType} />
+          <SingleFilter value="Item" setCurrentType={setCurrentSubType} />
+          <SingleFilter value="Stadium" setCurrentType={setCurrentSubType} />
+          <SingleFilter value="Supporter" setCurrentType={setCurrentSubType} />
+          <SingleFilter value="Stage 1" setCurrentType={setCurrentSubType} />
+          <SingleFilter value="GX" setCurrentType={setCurrentSubType} />
+          <SingleFilter value="Pokemon Tool" setCurrentType={setCurrentSubType} />
+          <SingleFilter value="Basic" setCurrentType={setCurrentSubType} />
+          <SingleFilter value="LEGEND" setCurrentType={setCurrentSubType} />
+          <SingleFilter value="Stage 2" setCurrentType={setCurrentSubType} />
+          <SingleFilter value="BREAK" setCurrentType={setCurrentSubType} />
+          <SingleFilter value="Rocket's Secret Machine" setCurrentType={setCurrentSubType} />
         </DropdownOptionsWrapper>
       </DropdownWrapper>
       <DropdownWrapper ref={hpRef}>
         <OpenDropdownButton onClick={(e) => closeDropdowns(e)}>HP</OpenDropdownButton>
         <DropdownOptionsWrapper isOpen={isHpOpen}>
-          <SingleFilter value="LT50" type="radio" setCurrentType={props.setCurrentHp} />
-          <SingleFilter value="LT100" type="radio" setCurrentType={props.setCurrentHp} />
-          <SingleFilter value="LT150" type="radio" setCurrentType={props.setCurrentHp} />
-          <SingleFilter value="GR50" type="radio" setCurrentType={props.setCurrentHp} />
-          <SingleFilter value="GR100" type="radio" setCurrentType={props.setCurrentHp} />
-          <SingleFilter value="GR150" type="radio" setCurrentType={props.setCurrentHp} />
-          <SingleFilter value="GR200" type="radio" setCurrentType={props.setCurrentHp} />
-          <SingleFilter value="All" type="radio" setCurrentType={props.setCurrentHp} />
+          <SingleFilter value="LT50" type="radio" setCurrentType={setCurrentHp} />
+          <SingleFilter value="LT100" type="radio" setCurrentType={setCurrentHp} />
+          <SingleFilter value="LT150" type="radio" setCurrentType={setCurrentHp} />
+          <SingleFilter value="GR50" type="radio" setCurrentType={setCurrentHp} />
+          <SingleFilter value="GR100" type="radio" setCurrentType={setCurrentHp} />
+          <SingleFilter value="GR150" type="radio" setCurrentType={setCurrentHp} />
+          <SingleFilter value="GR200" type="radio" setCurrentType={setCurrentHp} />
+          <SingleFilter value="All" type="radio" setCurrentType={setCurrentHp} />
         </DropdownOptionsWrapper>
       </DropdownWrapper>
     </FiltersWrapper>
