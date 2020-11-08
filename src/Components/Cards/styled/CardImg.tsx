@@ -10,7 +10,6 @@ const CardImg = styled.img`
     cursor: pointer;
     transform: rotateX(0);
     transform: scale(1.3);
-    box-shadow: 10px -10px 5px 0px #3d7dca;
   }
 `;
 export default CardImg;

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const OpenDropdownButton = styled.button`
   width: 200px;
-  height: 30px;
+  height: 40px;
   border-radius: 4px;
   border: none;
   font-size: 16px;

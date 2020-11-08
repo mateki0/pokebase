@@ -14,6 +14,6 @@ const SearchInput = styled.input`
   font-size: 16px;
   width: 300px;
   height: 40px;
-  padding-left: 10px;
+  padding-left: 20px;
 `;
 export default SearchInput;
