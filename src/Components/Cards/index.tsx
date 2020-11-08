@@ -5,6 +5,7 @@ import CardsList from './styled/CardsList';
 import CardImg from './styled/CardImg';
 import SingleCardItem from './styled/SingleCardItem';
 import { IFilteredCards } from '../types';
+import CardsWrapper from './styled/CardsWrapper';
 
 interface ICard {
   id: string;
@@ -24,15 +25,15 @@ const FilteredCards = ({ pokemons, min, max, isLoading }: IFilteredCards) => {
   }, [myElements]);
   if (!isLoading) {
     return (
-      <CardsList>
-        {eachPage.map((a: ICard, index: number) => (
-          <SingleCardItem key={index} ref={(li) => (myElements[index] = li)}>
-            <a href={a.imageUrlHiRes}>
+      <CardsWrapper>
+        <CardsList>
+          {eachPage.map((a: ICard, index: number) => (
+            <SingleCardItem key={index} ref={(li) => (myElements[index] = li)}>
               <CardImg src={a.imageUrl} />
-            </a>
-          </SingleCardItem>
-        ))}
-      </CardsList>
+            </SingleCardItem>
+          ))}
+        </CardsList>
+      </CardsWrapper>
     );
   }
   return <LoadingIcon />;

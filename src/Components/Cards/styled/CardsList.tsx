@@ -1,31 +1,27 @@
 import styled from 'styled-components';
-import device from '../../MediaQuerySizes';
+
 const CardsList = styled.ul`
   display: grid;
-  justify-content: center;
+  width: 90%;
+  margin-top: 20px;
+  justify-self: center;
   list-style-type: none;
   padding: 0;
-  margin: 0;
-  @media ${device.mobileS} {
-    margin: 10px auto 0 auto;
-    column-gap: 10px;
-    grid-gap: 5px;
-    grid-template-columns: 70px 70px 70px 70px;
+  grid-template-columns: 150px 150px;
+  gap: 10px;
+  @media only screen and (min-width: 768px) {
+    width: 100%;
+    grid-template-columns: 150px 150px 150px 150px;
+    gap: 20px;
   }
-  @media ${device.mobileL} {
-    grid-template-columns: 90px 90px 90px 90px;
-  }
-  @media ${device.tablet} {
-    grid-template-columns: 170px 170px 170px 170px;
-    column-gap: 40px;
-  }
-  @media ${device.laptop} {
-    grid-gap: 20px;
-    column-gap: 50px;
-  }
-  @media ${device.laptopL} {
+  @media only screen and (min-width: 1024px) {
     margin-top: 50px;
-    grid-template-columns: 250px 250px 250px 250px;
+    grid-template-columns: 200px 200px 200px 200px;
+    gap: 30px;
+  }
+  @media only screen and (min-width: 1280px) {
+    grid-template-columns: 200px 200px 200px 200px;
+    gap: 40px;
   }
 `;
 export default CardsList;

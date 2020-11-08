@@ -1,22 +1,11 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import styled from 'styled-components';
 import FilteredCards from '../Cards';
 import Pages from '../Pages';
 import FiltersContainer from '../FiltersContainer';
 import Header from '../Header';
-import device from '../MediaQuerySizes';
 import { IPokemon } from '../types';
+import StyledMain from './styled/StyledMain';
 const pokemon = require('pokemontcgsdk');
-
-const Main = styled.main`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  margin: 0 auto;
-  @media ${device.laptop} {
-    width: 80%;
-  }
-`;
 
 const Body = () => {
   const inputRef = useRef<HTMLInputElement>(null!);
@@ -167,7 +156,7 @@ const Body = () => {
     }
   }, []);
   return (
-    <Main>
+    <StyledMain>
       <Header changeQuery={changeQuery} inputRef={inputRef} />
       <FiltersContainer
         setCurrentSuperType={setCurrentSuperType}
@@ -184,7 +173,7 @@ const Body = () => {
         length={pokemons.length}
         page={page}
       />
-    </Main>
+    </StyledMain>
   );
 };
 export default Body;

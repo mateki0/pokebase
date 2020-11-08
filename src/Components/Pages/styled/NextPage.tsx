@@ -7,7 +7,7 @@ const NextPage = styled(MdChevronRight)`
   font-size: 34px;
   transition: color 0.5s;
   &:hover {
-    color: #e6001f;
+    color: #003a70;
   }
 `;
 

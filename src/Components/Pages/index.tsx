@@ -33,13 +33,7 @@ const Pages = ({ choosePage, changePage, prevPage, nextPage, length, page }: IPa
     }
     if (page >= 3) {
       pages.push(
-        <PageListItem
-          key="1"
-          onClick={(e) => choosePage(e)}
-          style={
-            page === 1 ? { color: '#e6001f', textDecoration: 'underline' } : { color: '#0424D9' }
-          }
-        >
+        <PageListItem key="1" onClick={(e) => choosePage(e)} isActive={page === 1}>
           1
         </PageListItem>
       );
@@ -50,13 +44,7 @@ const Pages = ({ choosePage, changePage, prevPage, nextPage, length, page }: IPa
       );
       for (let i = page; i <= page + additionalPages; i++) {
         pages.push(
-          <PageListItem
-            key={i}
-            onClick={(e) => choosePage(e)}
-            style={
-              page === i ? { color: '#e6001f', textDecoration: 'underline' } : { color: '#0424D9' }
-            }
-          >
+          <PageListItem key={i} onClick={(e) => choosePage(e)} isActive={page === i}>
             {i}
           </PageListItem>
         );
@@ -64,13 +52,7 @@ const Pages = ({ choosePage, changePage, prevPage, nextPage, length, page }: IPa
     } else {
       for (let i = 1; i <= page + additionalPages; i++) {
         pages.push(
-          <PageListItem
-            key={i}
-            onClick={(e) => choosePage(e)}
-            style={
-              page === i ? { color: '#e6001f', textDecoration: 'underline' } : { color: '#0424D9' }
-            }
-          >
+          <PageListItem key={i} onClick={(e) => choosePage(e)} isActive={page === i}>
             {i}
           </PageListItem>
         );

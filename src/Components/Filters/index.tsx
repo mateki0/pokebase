@@ -23,7 +23,7 @@ const Filters = ({
   const closeDropdowns = (e: { currentTarget: { innerText: string } }) => {
     switch (e.currentTarget.innerText) {
       case 'SuperType':
-        setIsSuperOpen(true);
+        isSuperOpen ? setIsSuperOpen(false) : setIsSuperOpen(true);
         setIsTypeOpen(false);
         setIsSubOpen(false);
         setIsHpOpen(false);
@@ -31,7 +31,7 @@ const Filters = ({
 
       case 'Type':
         setIsSuperOpen(false);
-        setIsTypeOpen(true);
+        isTypeOpen ? setIsTypeOpen(false) : setIsTypeOpen(true);
         setIsSubOpen(false);
         setIsHpOpen(false);
         break;
@@ -39,7 +39,7 @@ const Filters = ({
       case 'SubType':
         setIsSuperOpen(false);
         setIsTypeOpen(false);
-        setIsSubOpen(true);
+        isSubOpen ? setIsSubOpen(false) : setIsSubOpen(true);
         setIsHpOpen(false);
         break;
 
@@ -47,7 +47,7 @@ const Filters = ({
         setIsSuperOpen(false);
         setIsTypeOpen(false);
         setIsSubOpen(false);
-        setIsHpOpen(true);
+        isHpOpen ? setIsHpOpen(false) : setIsHpOpen(true);
         break;
     }
   };

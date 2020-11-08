@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import Body from './Components/Body/body';
 import Pokeball from './Components/Pokeball';
-
+import './global-font.css';
 const GlobalStyle = createGlobalStyle`
   body,html{
     top:0;
     margin:0;
     height:100%;
+    min-height:100%;
     background-repeat: no-repeat;
   background-attachment: fixed;
-  background:#F2CB05;
-  font-family: 'Courgette', cursive;
+  background:#FFCB05;
   #root{
     
     height:100%;

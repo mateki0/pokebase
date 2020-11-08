@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
 const HomeLink = styled.a`
-  font-family: 'Courgette', cursive;
+  font-family: 'PokemonSolid';
+  letter-spacing: 5px;
   font-size: 36px;
-  color: #0424d9;
+  color: #3d7dca;
   transition: color 0.5s linear;
-  font-weight: 600;
   &:hover {
-    color: #e6001f;
+    color: #003a70;
   }
 `;
 
